@@ -17,8 +17,9 @@ body{
 }
 
 .carousel-box{
-    width: 800px;
-    min-height: 400px;
+    width: 94vw;
+    max-width: 800px;
+    height: min(400px, 80vh);
     background-color: hsl(0, 0%, 100%);
     border-radius: 0.25rem;
     overflow: hidden;
@@ -39,8 +40,12 @@ body{
     align-items: center;
     justify-content: center;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 4rem;
+    font-size: min(4rem, 8vw);
     transition: transform 500ms ease-in-out;
+}
+
+.carousel-slide:first-of-type{
+    z-index: 150;
 }
 
 [data-carousel-button]{
@@ -58,7 +63,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0.5;
+    opacity: 0.75;
 }
 
 [data-carousel-button]::before{
@@ -107,15 +112,36 @@ body{
 
 .carousel-indicator li button{
     display: inline-block;
+    width: 1.25rem;
+    height: 2rem;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+}
+
+.indicator-position{
+    display: inline-block;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 100%;
+    background-color: hsla(222, 25%, 60%);
+    position: absolute;
+    transition: all 500ms ease-in-out;
+}
+
+.carousel-indicator li button::after{
+    content: "";
+    display: inline-block;
     width: 0.75rem;
     height: 0.75rem;
     border-radius: 100%;
     border: 1px solid hsla(222, 25%, 60%);
-    margin: 0.25rem;
-    cursor: pointer;
 }
 
-.carousel-indicator .active-carousel-indicator button{
+.carousel-indicator .active-carousel-indicator button::after{
     background-color: hsla(222, 25%, 60%);
 }
 

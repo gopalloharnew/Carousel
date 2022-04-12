@@ -4,7 +4,7 @@ const carouselBox = document.querySelector(".carousel-box");
 const carouselButtonsPrev = document.querySelector(`[data-carousel-button="prev"]`);
 const carouselButtonsNext = document.querySelector(`[data-carousel-button="next"]`);
 const carouselIndicator = document.querySelector(".carousel-indicator");
-let currentSlide = 2;
+let currentSlide = 0;
 
 const setSlidePosition = (slide, index) => {
     slide.style.transform = `translateX(${(index - currentSlide) * 100}%)`;
@@ -64,4 +64,13 @@ carouselBox.addEventListener("keydown", (e) => {
             }
             break;
     }
-})
+});
+
+setInterval(() => {
+    if(currentSlide < carouselSlides.length - 1){
+        currentSlide++;
+    }else{
+        currentSlide = 0;
+    }
+    carousel();
+}, 5000);
