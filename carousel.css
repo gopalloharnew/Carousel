@@ -23,6 +23,7 @@ body{
     border-radius: 0.25rem;
     overflow: hidden;
     position: relative;
+    outline: none;
 }
 
 .carousel-slide{
@@ -33,17 +34,18 @@ body{
     position: absolute;
     z-index: 100;
     background-color: hsl(0, 0%, 100%);
-    color: hsl(222, 25%, 75%);
+    color: hsl(222, 25%, 70%);
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 4rem;
+    transition: transform 500ms ease-in-out;
 }
 
 [data-carousel-button]{
-    width: 2rem;
-    height: 2rem;
+    width: 3rem;
+    height: 3rem;
     cursor: pointer;
     position: absolute;
     transform: translateY(-50%);
@@ -51,14 +53,72 @@ body{
     border: none;
     z-index: 200;
     user-select: none;
-    background: hsl(222, 10%, 90%);
-    border-radius: 0.1rem;
+    background: hsl(222, 10%, 94%);
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.5;
+}
+
+[data-carousel-button]::before{
+    content: "";
+    border: 1rem solid transparent;
+    border-left-color: red;
 }
 
 [data-carousel-button="prev"]{
     left: 1rem;
 }
 
+[data-carousel-button="prev"]::before{
+    border-right-color: hsl(222, 25%, 70%);
+    margin-right: 0.4rem;
+    border-width: 0.7rem 1.2rem 0.7rem 0rem;
+}
+
 [data-carousel-button="next"]{
     right: 1rem;
+}
+
+[data-carousel-button="next"]::before{
+    border-left-color: hsl(222, 25%, 70%);
+    margin-left: 0.4rem;
+    border-width: 0.7rem 0rem 0.7rem 1.2rem;
+}
+
+.carousel-indicator{
+    position: absolute;
+    background-color: hsla(222, 25%, 70%, 0.1);
+    z-index: 200;
+    height: 2rem;
+    padding: 0.25rem;
+    transform: translateX(-50%);
+    left: 50%;
+    bottom: 0.5rem;
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+}
+
+.carousel-indicator li{
+    list-style: none;
+}
+
+.carousel-indicator li button{
+    display: inline-block;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 100%;
+    border: 1px solid hsla(222, 25%, 60%);
+    margin: 0.25rem;
+    cursor: pointer;
+}
+
+.carousel-indicator .active-carousel-indicator button{
+    background-color: hsla(222, 25%, 60%);
+}
+
+.hide{
+    display: none;
 }
