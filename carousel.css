@@ -41,7 +41,7 @@ body{
     justify-content: center;
     font-family: Arial, Helvetica, sans-serif;
     font-size: min(4rem, 8vw);
-    transition: transform 500ms ease-in-out;
+    transition: transform 350ms ease-in-out;
 }
 
 .carousel-slide:first-of-type{
@@ -120,16 +120,6 @@ body{
     align-items: center;
     justify-content: center;
     background-color: transparent;
-}
-
-.indicator-position{
-    display: inline-block;
-    width: 0.75rem;
-    height: 0.75rem;
-    border-radius: 100%;
-    background-color: hsla(222, 25%, 60%);
-    position: absolute;
-    transition: all 500ms ease-in-out;
 }
 
 .carousel-indicator li button::after{

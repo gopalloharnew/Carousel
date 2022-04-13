@@ -23,12 +23,34 @@ const setCarouselIndicator = () => {
         li.classList.toggle("active-carousel-indicator", i === currentSlide);
         let button = document.createElement('button');
         button.addEventListener('click', ()=>{
-            currentSlide = i;
-            carousel();
+            changeSlide(i)
         })
         li.append(button);
         carouselIndicator.append(li);
     }
+}
+
+const resetCarouselTimeout = () => {
+    clearTimeout(carouselTimeout);
+    carouselTimeout = setTimeout(() => {changeSlide("next")}, 3000);
+}
+
+const changeSlide = (i) => {
+    switch (i) {
+        case "prev":
+            currentSlide = currentSlide > 0 ? currentSlide - 1 : carouselSlides.length - 1;
+            break;
+    
+        case "next":
+            currentSlide = currentSlide < carouselSlides.length - 1 ? currentSlide + 1 : 0;
+            break
+
+        default:
+            currentSlide = i;
+            break;
+    }
+    carousel();
+    resetCarouselTimeout();
 }
 
 const carousel = () => {
@@ -39,38 +61,18 @@ const carousel = () => {
 
 carousel();
 
-carouselButtonsNext.addEventListener('click', () => {
-    currentSlide++;
-    carousel();
-});
-
-carouselButtonsPrev.addEventListener('click', () => {
-    currentSlide--;
-    carousel();
-});
+carouselButtonsNext.addEventListener('click', () => {changeSlide("next")});
+carouselButtonsPrev.addEventListener('click', () => {changeSlide("prev")});
 
 carouselBox.addEventListener("keydown", (e) => {
     switch (e.key) {
         case "ArrowRight":
-            if(currentSlide < carouselSlides.length - 1){
-                currentSlide++;
-                carousel();
-            }
+            changeSlide("next");
             break;
         case "ArrowLeft":
-            if(currentSlide > 0){
-                currentSlide--;
-                carousel();
-            }
+            changeSlide("prev");
             break;
     }
 });
 
-setInterval(() => {
-    if(currentSlide < carouselSlides.length - 1){
-        currentSlide++;
-    }else{
-        currentSlide = 0;
-    }
-    carousel();
-}, 5000);
+let carouselTimeout = setTimeout(() => {changeSlide("next")}, 3000);
